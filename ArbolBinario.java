@@ -62,8 +62,8 @@ public class ArbolBinario {
 
         Nodo temporal = this.raiz;
 
-        while(temporal.getLlave() != palabra){
-
+        while(!temporal.getLlave().equals(palabra)){
+            //System.out.println(temporal.getLlave() + " " + palabra);
             temporal = temporal.getNodoIzquierda();
             if(temporal == null){
 

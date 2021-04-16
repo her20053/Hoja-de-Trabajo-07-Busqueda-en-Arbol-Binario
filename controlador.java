@@ -7,24 +7,22 @@ import java.util.Scanner;
 
 class controlador{
 
-    // Comenzamos el programa 
     public static void main(String[] args) {
 
         ArbolBinario arbol = new ArbolBinario();
+        String OracionAnalizarIng = "A woman in her house is doing her homework next to her dog";
+        String OracionAnalizarFrn = "Une femme dans sa maison fait ses devoirs à côté de son chien";
+        String OracionAnalizarEsp = "Una mujer en su casa hace tarea al lado de su perro";
 
         try{
 
-            //creando variables
-            File archivoTexto = new File("diccionario.txt"); //creando nuestro nuevo archivo
+            File archivoTexto = new File("diccionario.txt");
 
-            Scanner scan = new Scanner(archivoTexto); //instanciando la clase scanner con el archivo
+            Scanner scan = new Scanner(archivoTexto); 
 
-            while(scan.hasNextLine()) { //while para que se lean todas las lineas en el archivo
+            while(scan.hasNextLine()) {
 
-
-                String linea = scan.nextLine().toLowerCase(); //guardando los elementos (de cada linea) como variables
-
-                //separando los elementos por sus comas
+                String linea = scan.nextLine().toLowerCase();
 
                 String ing = linea.split(",")[0];
                 String esp = linea.split(",")[1];
@@ -44,25 +42,52 @@ class controlador{
                 Data.add(entrada1);
                 Data.add(entrada2);
                 Data.add(entrada3);
-
-                //           k    ,                 v -> Lista [ diccionario1: ING , diccionario2 , diccionario2]
                 Association<String,ArrayList<HashMap<String,String>>> Nodotemp = new Association<>(key,Data);
 
                 arbol.insertarNodo(key,Nodotemp);
 
             }
-            
-            Nodo nodoRaiz = arbol.getRaiz();
-            while(nodoRaiz.getNodoIzquierda() != null){
-                System.out.println(nodoRaiz.getValor().toString());
-                nodoRaiz = nodoRaiz.getNodoIzquierda();
-            }
 
         }
         catch (FileNotFoundException errorArchivoNoEncontrado) {
-            // Se le advierte al usuario que el archivo no es existente, se termina el programa.
             System.out.println("\nEl archivo de texto diccionario.txt no ha sido encontrado.\n");
         }
+
+
+        // Analizando la oracion:
+        String   traducirAIdimoa = "Spanish";
+
+        String   oracionResultante = "";
+
+        String[] oracionSeparada = OracionAnalizarEsp.toLowerCase().split(" ");
+
+        for (String string : oracionSeparada) {
+
+            String palabraTemp = string; 
+
+            Nodo nodoEncontrado = arbol.localizarNodo(palabraTemp);
+            if(nodoEncontrado != null){
+
+                Association<String,ArrayList<HashMap<String, String>>> associationTemp = nodoEncontrado.getValor();
+                ArrayList<HashMap<String, String>> arrayListTemp = associationTemp.getValue();
+                for(int i = 0; i < arrayListTemp.size(); i++){
+
+                    HashMap<String,String> hashMapTemp = arrayListTemp.get(i);
+                    if(hashMapTemp.get(traducirAIdimoa) != null){
+                        oracionResultante += hashMapTemp.get(traducirAIdimoa);
+                    }    
+
+                }
+
+            }
+            else{
+
+                oracionResultante += " *" + palabraTemp + "* ";
+
+            }
+
+        }
+        System.out.println(oracionResultante);
         
     }
 }
