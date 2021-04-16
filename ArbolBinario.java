@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class ArbolBinario {
 
     private Nodo raiz;
@@ -42,8 +45,6 @@ public class ArbolBinario {
                     return;
     
                 }
-
-                
 
             }
 

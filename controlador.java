@@ -45,11 +45,19 @@ class controlador{
                 Data.add(entrada2);
                 Data.add(entrada3);
 
+                //           k    ,                 v -> Lista [ diccionario1: ING , diccionario2 , diccionario2]
                 Association<String,ArrayList<HashMap<String,String>>> Nodotemp = new Association<>(key,Data);
 
-                arbol.insertarNodo(key,Data);
+                arbol.insertarNodo(key,Nodotemp);
 
-            }   
+            }
+            
+            Nodo nodoRaiz = arbol.getRaiz();
+            while(nodoRaiz.getNodoIzquierda() != null){
+                System.out.println(nodoRaiz.getValor().toString());
+                nodoRaiz = nodoRaiz.getNodoIzquierda();
+            }
+
         }
         catch (FileNotFoundException errorArchivoNoEncontrado) {
             // Se le advierte al usuario que el archivo no es existente, se termina el programa.
