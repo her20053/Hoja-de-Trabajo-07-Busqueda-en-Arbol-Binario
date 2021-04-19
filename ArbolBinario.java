@@ -58,21 +58,38 @@ public class ArbolBinario {
 
     }
 
-    public Nodo localizarNodo(String palabra){
+    public Nodo localizarNodo(String palabra, String idiomaOriginal){
 
         Nodo temporal = this.raiz;
 
-        while(!temporal.getLlave().equals(palabra)){
-            //System.out.println(temporal.getLlave() + " " + palabra);
+        // System.out.println(palabra + " " + idiomaNuevo + " " + idiomaOriginal);
+
+        //System.out.println(temporal.getValor().getValue().get(0).get(idiomaOriginal).equals(palabra));
+
+        // System.out.println(temporal.getValor().getValue().get(0).get("English") + " " + palabra);
+
+        // //System.out.println(temporal.getValor().getValue().get(0).get(idioma));
+
+        while(!temporal.getValor().getValue().get(0).get(idiomaOriginal).equals(palabra)){
+        
             temporal = temporal.getNodoIzquierda();
             if(temporal == null){
-
                 return null;
-
             }
 
         }
         return temporal;
+        //     //System.out.println(temporal.getLlave() + " " + palabra);
+        //     temporal = temporal.getNodoIzquierda();
+        //     if(temporal == null){
+
+        //         return null;
+
+        //     }
+
+        // }
+        // return temporal;
+        //return null;
 
 
     }

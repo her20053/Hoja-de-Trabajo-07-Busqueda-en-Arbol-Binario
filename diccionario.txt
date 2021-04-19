@@ -1,4 +1,4 @@
-house,casa,loge
+house,casa,maison
 dog,perro,chien
 homework,tarea,devoirs
 woman,mujer,femme
